@@ -1,26 +1,30 @@
 import React, { useState } from "react";
 import { Auth } from "../../firebase/config";
+import Spinner from "../layout/Spinner";
 
 const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { setLoggedIn, setUser } = props;
+  const { setLoading, setLoggedIn, setUser, loading } = props;
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     Auth.signInWithEmailAndPassword(username, password)
       .then((res) => {
-        console.log(res.user);
         setLoggedIn(true);
         setUser(res.user);
+        setLoading(false);
         props.history.push("/dashboard");
       })
       .catch((err) => console.log(err.code, err.message));
   };
 
-  return (
+  return loading ? (
+    <Spinner />
+  ) : (
     <form className="auth" onSubmit={(e) => handleLogin(e)}>
       <div className="form-group">
         <label>Username: </label>
