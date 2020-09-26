@@ -1,27 +1,22 @@
-import React, { Fragment } from "react";
-import { useHistory } from "react-router-dom";
-import { Auth } from "../../firebase/config";
+import React, { useContext } from "react";
+import Appbar from "./Appbar";
+import { AuthContext } from "../../context/auth/AuthContext";
+import Post from "../post/Post";
 import Spinner from "./Spinner";
 
-const Dashboard = ({ loading }) => {
-  const history = useHistory();
+const Dashboard = () => {
+  const { user, loading, posts } = useContext(AuthContext);
 
-  const handleLogout = () => {
-    console.log("clicked");
-    Auth.signOut();
-    history.push("/dashboard");
-  };
-
-  return (
+  return loading ? (
+    <Spinner />
+  ) : (
     <div className="dashboard">
-      {loading ? (
-        <Spinner />
-      ) : (
-        <Fragment>
-          <h1>Dashboard</h1>
-          <button onClick={handleLogout}>Logout</button>
-        </Fragment>
-      )}
+      <Appbar />
+      <div className="container">
+        {posts.map((post) => (
+          <Post post={post} key={post.id} user={user} />
+        ))}
+      </div>
     </div>
   );
 };

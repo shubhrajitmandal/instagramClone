@@ -1,4 +1,5 @@
 import * as firebase from "firebase/app";
+import "firebase/storage";
 import "firebase/firestore";
 import "firebase/firebase-auth";
 
@@ -17,5 +18,7 @@ firebase.initializeApp(firebaseConfig);
 
 const Auth = firebase.auth();
 const Firestore = firebase.firestore();
+const Storage = firebase.storage();
+const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 
-export { Auth, Firestore };
+export { firebase, Auth, Firestore, Storage, GoogleProvider };

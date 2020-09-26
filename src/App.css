@@ -1,15 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: #282828;
+  color: #222;
+  font-family: "Segoe UI";
 }
 
 .app {
   background-color: #fafafa;
 }
 
+/* ################### AUTH ###################### */
 .auth {
+  background: #fafafa;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -17,37 +22,185 @@
   justify-content: center;
 }
 
-.form-group {
+.auth-form {
+  width: 350px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 1);
+  /* background: #fff; */
+  border: 1px solid lightgray;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.auth-logo {
+  height: 5rem;
+  object-fit: contain;
   margin-bottom: 2rem;
 }
 
-.form-group label {
-  margin-right: 1rem;
-  font-size: 1.25rem;
+.auth .form-group {
+  margin-bottom: 0.5rem;
 }
 
-.form-group input[type="text"],
-.form-group input[type="password"] {
-  width: 500px;
-  font-size: 1.25rem;
-  padding: 4px;
+.auth .form-group input {
+  width: 300px;
+  padding: 8px;
+  outline: none;
+  border-radius: 2px;
+  background: #f8f8f8;
+  border: 1px solid lightgray;
+  font-size: 1rem;
 }
 
-.form-group input[type="submit"] {
-  font-size: 1.25rem;
-  padding: 2px 8px;
+.auth .form-group input:focus {
+  border: 1px solid #aaa;
+}
+
+.auth ::placeholder {
+  color: #333;
+  font-size: 12px;
+}
+
+.auth .form-group .submit {
+  width: 300px;
+  height: 32px;
+  padding: 0 10px;
+  margin-top: 1rem;
   cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  background: rgb(30, 150, 210);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* font-weight: 600; */
+}
+.auth .form-group .submit:disabled {
+  opacity: 0.5;
 }
 
-.dashboard {
-  height: 100vh;
+.google-auth {
+  margin-top: 1rem;
+  color: #666;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.google-auth div {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: #999;
+  font-weight: 600;
+}
+
+.bar {
+  width: 125px;
+  height: 1px;
+  background: lightgray;
+  margin: 0 10px;
+}
+
+.google-link {
+  display: flex;
+  /* padding: 4px; */
+  align-items: center;
   justify-content: center;
+  border-radius: 4px;
+  width: 300px;
+  text-decoration: none;
+  margin-top: 1rem;
+  /* background: rgb(60, 72, 207); */
+  /* color: white; */
+  color: rgb(60, 72, 207);
+  font-weight: 600;
+}
+
+.google-link img {
+  margin-right: 0.5rem;
+}
+
+.password-link {
+  margin: 1rem;
+  font-size: 14px;
+  text-decoration: none;
+  color: rgb(27, 27, 145);
+}
+
+.auth-signup,
+.auth-login {
+  width: 350px;
+  margin-top: 1rem;
+  padding: 25px;
+  border: 1px solid lightgray;
+  text-align: center;
+  font-weight: 300;
+  background: #fff;
+}
+
+.signup-link {
+  text-decoration: none;
+  color: #0088ff;
+  font-weight: 600;
+}
+
+.register .auth-form .auth-logo {
+  margin-bottom: 0;
+}
+
+.register .auth-form h3 {
+  color: #888;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.register .google-auth {
+  margin-bottom: 1.5rem;
+}
+
+.register .google-link {
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  width: 300px;
+  text-decoration: none;
+  margin-top: 1rem;
+  background: #0088ff;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.google-icon {
+  margin-right: 0.5rem;
+  fill: white;
+  font-size: 20px;
+}
+
+.singup-text {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 14px;
+  text-align: center;
+  color: #888;
+}
+
+.alert {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 14px;
+  color: crimson;
 }
 
 .spinner {
@@ -55,4 +208,629 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* ################### APPBAR ###################### */
+
+.appbar-container {
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid lightgray;
+}
+
+.appbar {
+  position: sticky;
+  top: 0;
+  height: 4rem;
+  width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.appbar-logo {
+  height: 3rem;
+  object-fit: contain;
+}
+
+.appbar-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appbar-menu a {
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.appbar-icon {
+  font-size: 2rem;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.user-avatar {
+  border: 1px solid #999;
+  margin-right: 0;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 1.25rem;
+  color: white;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* ################### DASHBOARD ###################### */
+.dashboard {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.container {
+  height: 100%;
+  position: relative;
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 600px;
+}
+
+/* ################### POST ###################### */
+.post {
+  background: #fff;
+  margin: 1rem auto;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0 1rem 1rem;
+}
+
+.post-header a {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.post-user {
+  font-size: 16px;
+  display: inline;
+  font-weight: 600;
+}
+
+.avatar {
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  background: #fff;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.img-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-image {
+  min-width: 598px;
+  width: 100%;
+  /* min-height: 300px; */
+  object-fit: contain;
+}
+
+.post-options {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.post-react {
+  padding: 1rem 0 1rem 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.react-icons {
+  font-size: 2rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  transform: rotateY(180deg);
+  color: #333;
+}
+.react-icon-liked {
+  margin-right: 1rem;
+  cursor: pointer;
+  fill: #d61d2c;
+}
+
+.react-icon-liked {
+  font-size: 2rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.likes {
+  margin-left: 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.caption {
+  padding: 0 1rem;
+  line-height: 1rem;
+  width: 90%;
+}
+
+.caption {
+  line-height: 1rem;
+}
+
+.post-comment {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.comment-area {
+  padding: 0 1rem;
+  list-style: none;
+}
+
+.comment {
+  margin-bottom: 0.5rem;
+}
+
+.comment div {
+  width: 90%;
+}
+
+.comment-form {
+  position: relative;
+  padding: 0 1rem;
+  display: flex;
+}
+
+.comment-input {
+  margin-bottom: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  outline: none;
+  border: 1px solid lightgray;
+  border-radius: 2rem;
+  font-size: 1rem;
+}
+
+.comment-submit {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-60%);
+  outline: none;
+  border: none;
+  background: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: #0088ff;
+}
+
+.comment-submit:disabled {
+  opacity: 0.7;
+}
+
+.timestamp {
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  font-size: 13px;
+  color: #999;
+}
+
+/*##################### POSTFORM ##################*/
+.post-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.post-image-label {
+  position: absolute;
+  top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  height: 400px;
+  width: 100%;
+  color: #666;
+  pointer-events: none;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  background: #eee;
+}
+
+.post-imageInput {
+  opacity: 0;
+  cursor: pointer;
+  height: 400px;
+  width: 100%;
+}
+
+.preview-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.preview-container::before {
+  content: url("./assets/images/close2.png");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  background-size: cover;
+  transition: opacity 0.4s ease-in;
+}
+
+.preview-container:hover::before {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.post-preview {
+  width: 100%;
+  object-fit: contain;
+}
+
+.post-textInput {
+  position: relative;
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  outline: none;
+  padding: 0.5rem;
+  background: white;
+  margin: 2rem 0;
+}
+.post-textInput::placeholder {
+  font-size: 1.25rem;
+}
+
+.post-textInput:focus {
+  border: 1px solid #999;
+}
+
+.post-submit {
+  width: 100%;
+  padding: 0.5rem 0;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  background: #0088ff;
+}
+
+/*##################### PROFILE ##################*/
+.profile-container {
+  height: 100%;
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  color: #222;
+}
+
+.profile-desc {
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid lightgray;
+  padding: 2rem 0;
+}
+
+.profile-avatar {
+  display: flex;
+  justify-content: center;
+  width: 30%;
+  position: relative;
+  background: #fafafa;
+}
+
+.profile-avatar img {
+  object-fit: cover;
+  height: 160px;
+  width: 160px;
+  border-radius: 50%;
+  border: 1px solid #666;
+  pointer-events: none;
+}
+
+.profile-avatar input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  height: 160px;
+  width: 160px;
+  cursor: pointer;
+  /* border-radius: 50%;
+  border: 1px solid #666;  
+  background: url("./assets/images/default.png");
+  background-size: contain; */
+}
+
+.profile-info {
+  width: 70%;
+  padding: 0 2rem;
+}
+
+.profile-header,
+.profile-stats {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  list-style: none;
+}
+
+.profile-name {
+  font-size: 2rem;
+  font-weight: 300;
+  margin-right: 1.25rem;
+}
+
+.profile-edit,
+.profile-follow {
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid lightgray;
+  background: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.profile-edit:hover,
+.profile-follow:hover {
+  border: 1px solid #999;
+}
+
+.profile-unfollow {
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  border: none;
+  background: #0088ff;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.profile-stats li {
+  margin-right: 2rem;
+}
+
+.profile-stats li strong {
+  font-weight: 600;
+}
+
+.profile-bio h3 {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile-bio p {
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.profile-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.gallery-item img {
+  width: 310px;
+  height: 310px;
+  object-fit: contain;
+  margin-right: 35px;
+}
+/*##################### PROFILE EDIT FORM ##################*/
+.edit-container {
+  margin: 2rem auto;
+  display: flex;
+  width: 1000px;
+  background: #fff;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+}
+
+.edit-sidebar {
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  list-style: none;
+  width: 25%;
+  border-right: 1px solid lightgray;
+}
+
+.edit-sidebar li {
+  margin: 1rem 0;
+  font-size: 1rem;
+}
+
+.active {
+  font-weight: 600;
+  color: #111;
+}
+
+.edit-form {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+}
+
+.edit-form .form-group {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  margin: 1rem 0;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+  margin-left: 2rem;
+  padding: 5px 10px;
+  outline: none;
+  font-size: 1rem;
+  color: #333;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  width: 400px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border: 1px solid #999;
+}
+
+.edit-avatar {
+  border: 1px solid #999;
+  object-fit: contain;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  margin-left: auto;
+  object-fit: cover;
+}
+
+.edit-header {
+  padding-left: 2rem;
+  font-size: 1.25rem;
+  display: flex;
+  line-height: 1.25rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.edit-header label {
+  font-size: 1rem;
+  color: #0088ff;
+  pointer-events: none;
+}
+
+.edit-header input[type="file"] {
+  transform: translateY(-80%);
+  opacity: 0;
+  cursor: pointer;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+}
+
+.submit input {
+  padding: 5px 20px;
+  background: #0088ff;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  color: white;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+
+/*##################### RESPONSIVE ##################*/
+@media screen and (max-width: 480px) {
+  .appbar {
+    display: none;
+  }
+
+  .container {
+    margin-top: 0;
+    padding: 0;
+    width: 100%;
+  }
+  .post {
+    font-size: 13px;
+  }
+
+  .post-react {
+    padding: 0.5rem 0 0.5rem 1rem;
+  }
+
+  .react-icons {
+    font-size: 1.25rem;
+  }
+
+  .likes {
+    font-size: 14px;
+  }
+
+  .post-user {
+    font-size: 14px;
+  }
+
+  .auth-form,
+  .auth-signup {
+    width: 100%;
+    border: none;
+  }
+
+  .auth-login {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
 }
