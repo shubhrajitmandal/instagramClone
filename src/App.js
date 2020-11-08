@@ -7,6 +7,7 @@ import PostForm from "./components/post/PostForm";
 import UserProfile from "./components/profile/UserProfile";
 import Profile from "./components/profile/Profile";
 import EditProfileFrom from "./components/profile/EditProfileForm";
+import PostView from "./components/post/PostView";
 import ProtectedRoute from "./components/routing/ProtectedRoute";
 import { AuthState } from "./context/auth/AuthContext";
 import "./App.css";
@@ -35,6 +36,11 @@ const App = () => {
               exact
               path="/dashboard/profile/:username"
               component={Profile}
+            />
+            <ProtectedRoute
+              exact
+              path="/dashboard/:postId"
+              component={PostView}
             />
           </Switch>
         </div>

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Appbar from "./Appbar";
+import AppbarMenu from "./AppbarMenu";
 import { AuthContext } from "../../context/auth/AuthContext";
 import Post from "../post/Post";
 import Spinner from "./Spinner";
@@ -17,6 +18,7 @@ const Dashboard = () => {
           <Post post={post} key={post.id} user={user} />
         ))}
       </div>
+      {/* <AppbarMenu /> */}
     </div>
   );
 };

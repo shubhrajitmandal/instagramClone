@@ -27,7 +27,7 @@
   padding: 25px;
   background: rgba(255, 255, 255, 1);
   /* background: #fff; */
-  border: 1px solid lightgray;
+  border: 1px solid #ccc;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,12 +45,13 @@
 }
 
 .auth .form-group input {
+  margin: 0;
   width: 300px;
   padding: 8px;
   outline: none;
   border-radius: 2px;
   background: #f8f8f8;
-  border: 1px solid lightgray;
+  border: 1px solid #ccc;
   font-size: 1rem;
 }
 
@@ -103,7 +104,7 @@
 .bar {
   width: 125px;
   height: 1px;
-  background: lightgray;
+  background: #ccc;
   margin: 0 10px;
 }
 
@@ -138,7 +139,7 @@
   width: 350px;
   margin-top: 1rem;
   padding: 25px;
-  border: 1px solid lightgray;
+  border: 1px solid #ccc;
   text-align: center;
   font-weight: 300;
   background: #fff;
@@ -215,7 +216,7 @@
 .appbar-container {
   width: 100%;
   background: #fff;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid #ccc;
 }
 
 .appbar {
@@ -227,11 +228,84 @@
   align-items: center;
   justify-content: space-between;
   margin: auto;
+  z-index: 2;
 }
 
 .appbar-logo {
   height: 3rem;
   object-fit: contain;
+}
+
+.search-container {
+  width: 200px;
+  position: relative;
+}
+
+.search input {
+  width: 100%;
+  outline: none;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #333;
+}
+
+.search input:focus {
+  border: 1px solid #999;
+}
+
+.search input::placeholder {
+  text-align: center;
+}
+
+.search-close {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  font-size: 1.25rem;
+  fill: #666;
+  cursor: pointer;
+}
+
+.search-result {
+  list-style: none;
+  position: absolute;
+  width: 100%;
+  height: 400px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  top: 2rem;
+  overflow-y: auto;
+  /* scrollbar-color: #999 #ccc; */
+  scrollbar-width: thin;
+}
+
+.search-result-items {
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.search-avatar {
+  margin-right: 1rem;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+  object-fit: cover;
+}
+
+.search-result-items h3 {
+  color: #333;
+  font-size: 14px;
+}
+
+.search-result-items p {
+  color: #999;
+  font-size: 13px;
 }
 
 .appbar-menu {
@@ -240,7 +314,8 @@
   justify-content: center;
 }
 
-.appbar-menu a {
+.appbar-menu a,
+.appbar-bottom a {
   margin-right: 1rem;
   display: flex;
   align-items: center;
@@ -267,6 +342,10 @@
   cursor: pointer;
 }
 
+.appbar-bottom {
+  opacity: 0;
+}
+
 /* ################### DASHBOARD ###################### */
 .dashboard {
   min-height: 100vh;
@@ -287,9 +366,10 @@
 
 /* ################### POST ###################### */
 .post {
+  width: 100%;
   background: #fff;
   margin: 1rem auto;
-  border: 1px solid lightgray;
+  border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
   font-weight: 400;
@@ -302,6 +382,9 @@
 }
 
 .post-header a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: bold;
   text-decoration: none;
 }
@@ -332,9 +415,8 @@
 }
 
 .post-image {
-  min-width: 598px;
+  /* max-width: 598px; */
   width: 100%;
-  /* min-height: 300px; */
   object-fit: contain;
 }
 
@@ -418,9 +500,13 @@
   width: 100%;
   padding: 0.75rem 1rem;
   outline: none;
-  border: 1px solid lightgray;
+  border: 1px solid #ccc;
   border-radius: 2rem;
   font-size: 1rem;
+}
+
+.comment-input:focus {
+  border: 1px solid #666;
 }
 
 .comment-submit {
@@ -470,7 +556,7 @@
   width: 100%;
   color: #666;
   pointer-events: none;
-  border: 1px solid lightgray;
+  border: 1px solid #ccc;
   border-radius: 4px;
   background: #eee;
 }
@@ -516,7 +602,7 @@
 .post-textInput {
   position: relative;
   width: 100%;
-  border: 1px solid lightgray;
+  border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
   padding: 0.5rem;
@@ -558,7 +644,7 @@
 .profile-desc {
   width: 100%;
   display: flex;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid #ccc;
   padding: 2rem 0;
 }
 
@@ -615,7 +701,7 @@
   text-decoration: none;
   padding: 4px 8px;
   border-radius: 4px;
-  border: 1px solid lightgray;
+  border: 1px solid #ccc;
   background: none;
   outline: none;
   font-size: 14px;
@@ -661,15 +747,48 @@
 }
 
 .profile-gallery {
+  width: 1000px;
+  margin-top: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2rem;
 }
 
 .gallery-item img {
-  width: 310px;
-  height: 310px;
-  object-fit: contain;
-  margin-right: 35px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-item {
+  position: relative;
+}
+
+.gallery-hover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: none;
+  color: white;
+  font-size: 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
+
+.gallery-hover svg {
+  fill: white;
+  margin-right: 0.5rem;
+  margin-left: 1.5rem;
+}
+
+.gallery-item:hover {
+  cursor: pointer;
+}
+
+.gallery-item:hover .gallery-hover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 /*##################### PROFILE EDIT FORM ##################*/
 .edit-container {
@@ -677,7 +796,7 @@
   display: flex;
   width: 1000px;
   background: #fff;
-  border: 1px solid lightgray;
+  border: 1px solid #ccc;
   border-radius: 4px;
 }
 
@@ -688,7 +807,7 @@
   align-items: flex-start;
   list-style: none;
   width: 25%;
-  border-right: 1px solid lightgray;
+  border-right: 1px solid #ccc;
 }
 
 .edit-sidebar li {
@@ -729,7 +848,7 @@
   outline: none;
   font-size: 1rem;
   color: #333;
-  border: 1px solid lightgray;
+  border: 1px solid #ccc;
   border-radius: 4px;
   width: 400px;
 }
@@ -792,8 +911,22 @@
 }
 
 /*##################### RESPONSIVE ##################*/
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 1000px) {
   .appbar {
+    width: 90%;
+  }
+
+  .profile-container {
+    width: 90%;
+  }
+
+  .profile-gallery {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .search {
     display: none;
   }
 
@@ -802,6 +935,130 @@
     padding: 0;
     width: 100%;
   }
+
+  .post-imageInput,
+  .post-image-label,
+  .post-textInput,
+  .post-submit {
+    width: 90%;
+  }
+
+  .post-imageInput,
+  .post-image-label {
+    height: 300px;
+  }
+
+  .post-image-label {
+    font-size: 1.5rem;
+  }
+
+  .post-image-label img {
+    height: 200px;
+    width: 200px;
+  }
+
+  .profile-avatar img,
+  .profile-avatar input[type="file"] {
+    height: 80px;
+    width: 80px;
+  }
+
+  .profile-desc {
+    padding: 1.5rem 0;
+  }
+
+  .profile-header {
+    margin-bottom: 1rem;
+  }
+
+  .profile-name {
+    font-size: 1.5rem;
+  }
+
+  .profile-info {
+    width: 80%;
+    padding: 0 1rem;
+  }
+
+  .profile-edit,
+  .profile-follow {
+    font-size: 12px;
+  }
+
+  .profile-unfollow {
+    font-size: 12px;
+  }
+
+  .profile-stats {
+    margin-bottom: 1rem;
+  }
+
+  .profile-stats li {
+    margin-right: 10px;
+    font-size: 13px;
+  }
+
+  .profile-stats li strong {
+    font-weight: 600;
+  }
+
+  .profile-bio h3 {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 0.5rem;
+  }
+
+  .profile-bio p {
+    font-weight: 400;
+    font-size: 13px;
+  }
+
+  .gallery-hover {
+    font-size: 13px;
+  }
+
+  .gallery-hover svg {
+    margin: 0 0.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .appbar {
+    height: 3rem;
+  }
+
+  .appbar-logo {
+    height: 2.5rem;
+  }
+
+  .appbar-icon {
+    font-size: 1.75rem;
+  }
+
+  .user-avatar {
+    height: 1.75rem;
+    width: 1.75rem;
+  }
+
+  .appbar-bottom {
+    padding: 0.5rem 10%;
+    opacity: 1;
+    width: 100%;
+    background: white;
+    z-index: 2;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+
+  .appbar-menu-icon {
+    font-size: 2rem;
+    cursor: pointer;
+    font-weight: normal;
+  }
+
   .post {
     font-size: 13px;
   }
@@ -814,6 +1071,10 @@
     font-size: 1.25rem;
   }
 
+  .react-icon-liked {
+    font-size: 1.25rem;
+  }
+
   .likes {
     font-size: 14px;
   }
@@ -822,8 +1083,11 @@
     font-size: 14px;
   }
 
-  .auth-form,
-  .auth-signup {
+  .auth {
+    background: white;
+  }
+
+  .auth-form {
     width: 100%;
     border: none;
   }

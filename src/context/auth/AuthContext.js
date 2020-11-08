@@ -34,12 +34,12 @@ const AuthState = ({ children }) => {
                   const userPosts = [];
                   snap.forEach((doc) => {
                     if (profile.Posts.includes(doc.id)) {
-                      userPosts.push(doc.data());
+                      userPosts.push({ ...doc.data(), id: doc.id });
                     }
                   });
                   setUserPosts(userPosts);
+                  setLoading(false);
                 });
-              setLoading(false);
             } else {
               setLoading(true);
               const data = {

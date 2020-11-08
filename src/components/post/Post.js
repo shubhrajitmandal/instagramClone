@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   BsHeart,
@@ -15,9 +15,11 @@ const Post = ({ post, user }) => {
   const [likes, setLikes] = useState(post.likes);
   const [liked, setLiked] = useState(post.likes.includes(user.Email));
   const [comment, setComment] = useState("");
-  const [comments, setComments] = useState(post.comments);
+  const [comments, setComments] = useState(post.comments.slice(0, 3));
 
   const { likePost, dislikePost, postComment } = useContext(AuthContext);
+
+  const commentRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +29,7 @@ const Post = ({ post, user }) => {
   };
 
   const getPostUploadTime = () => {
-    const sec = (Date.now() - post.date) / 1000;
+    const sec = Math.floor((Date.now() - post.date) / 1000);
     let timeString;
     if (sec < 60) {
       return sec.toString() + " seconds ago";
@@ -47,11 +49,6 @@ const Post = ({ post, user }) => {
   return (
     <div className="post">
       <div className="post-header">
-        <img
-          src={post.avatarURL ? post.avatarURL : Default}
-          alt=""
-          className="avatar"
-        />
         <Link
           to={
             post.username === user.Username
@@ -60,6 +57,11 @@ const Post = ({ post, user }) => {
           }
           className="post-user"
         >
+          <img
+            src={post.avatarURL ? post.avatarURL : Default}
+            alt=""
+            className="avatar"
+          />
           {post.username}
         </Link>
         <span className="spacer" />
@@ -91,7 +93,12 @@ const Post = ({ post, user }) => {
               }}
             />
           )}
-          <BsChat className="react-icons" />
+          <BsChat
+            className="react-icons"
+            onClick={() => {
+              commentRef.current.focus();
+            }}
+          />
           <FiShare className="react-icons" />
           <span className="spacer"></span>
           <BsBookmark className="react-icons" />
@@ -123,6 +130,7 @@ const Post = ({ post, user }) => {
             className="comment-input"
             type="text"
             value={comment}
+            ref={commentRef}
             placeholder="Add a comment..."
             onChange={(e) => setComment(e.target.value)}
           />

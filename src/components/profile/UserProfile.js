@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import Default from "../../assets/images/default.png";
 import { AuthContext } from "../../context/auth/AuthContext";
 import Appbar from "../layout/Appbar";
+import AppbarMenu from "../layout/AppbarMenu";
 import Loader from "../layout/Loader";
 import Spinner from "../layout/Spinner";
+import { BsHeartFill, BsChatFill } from "react-icons/bs";
 
-const UserProfile = (props) => {
+const UserProfile = () => {
   const { loading, user, updatePhoto, userPosts } = useContext(AuthContext);
 
   const changeAvatar = (file) => {
@@ -60,11 +62,19 @@ const UserProfile = (props) => {
         <div className="profile-gallery">
           {userPosts.map((post, index) => (
             <div className="gallery-item" key={index}>
-              <img src={post.imageURL} alt="" />
+              <div className="gallery-hover">
+                <BsHeartFill /> {post.likes.length}
+                <BsChatFill />
+                {post.comments.length}
+              </div>
+              <Link to={`/dashboard/${post.id}`}>
+                <img src={post.imageURL} alt="" />
+              </Link>
             </div>
           ))}
         </div>
       </div>
+      {/* <AppbarMenu /> */}
     </div>
   );
 };

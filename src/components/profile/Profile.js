@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Default from "../../assets/images/default.png";
 import { AuthContext } from "../../context/auth/AuthContext";
 import Appbar from "../layout/Appbar";
+import AppbarMenu from "../layout/AppbarMenu";
 import Spinner from "../layout/Spinner";
+import { BsHeartFill, BsChatFill } from "react-icons/bs";
 import { firebase, Firestore } from "../../firebase/config";
 
 const Profile = (props) => {
@@ -32,7 +34,7 @@ const Profile = (props) => {
                 const userPosts = [];
                 snap.forEach((doc) => {
                   if (profile.Posts.includes(doc.id)) {
-                    userPosts.push(doc.data());
+                    userPosts.push({ id: doc.id, ...doc.data() });
                   }
                 });
                 setUserPosts(userPosts);
@@ -122,11 +124,19 @@ const Profile = (props) => {
         <div className="profile-gallery">
           {userPosts.map((post, index) => (
             <div className="gallery-item" key={index}>
-              <img src={post.imageURL} alt="" />
+              <div className="gallery-hover">
+                <BsHeartFill /> {post.likes.length}
+                <BsChatFill />
+                {post.comments.length}
+              </div>
+              <Link to={`/dashboard/${post.id}`}>
+                <img src={post.imageURL} alt="" />
+              </Link>
             </div>
           ))}
         </div>
       </div>
+      {/* <AppbarMenu /> */}
     </div>
   );
 };
