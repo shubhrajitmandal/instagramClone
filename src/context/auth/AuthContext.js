@@ -12,14 +12,11 @@ const AuthState = ({ children }) => {
   const [userPosts, setUserPosts] = useState([]);
   const [userProfile, setUserProfile] = useState(null);
 
-  // const history = useHistory();
-
   useEffect(() => {
     Auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
         localStorage.setItem("current-user", user.email);
-        // console.log("Auth State Checked!");
 
         Firestore.collection("Users")
           .doc(user.email)
@@ -154,7 +151,6 @@ const AuthState = ({ children }) => {
           date: Date.now(),
         };
         const res = await Firestore.collection("Posts").add(post);
-        // console.log(res.id);
         await Firestore.collection("Users")
           .doc(user.email)
           .set(
