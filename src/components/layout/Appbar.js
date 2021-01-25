@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { BiSearch, BiLogOutCircle } from "react-icons/bi";
+import { BiLogOutCircle } from "react-icons/bi";
 import { CgAddR } from "react-icons/cg";
 import { AiFillHome } from "react-icons/ai";
 import Search from "./Search";

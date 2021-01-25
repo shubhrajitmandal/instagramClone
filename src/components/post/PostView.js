@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Appbar from "../layout/Appbar";
-import AppbarMenu from "../layout/AppbarMenu";
+// import AppbarMenu from "../layout/AppbarMenu";
 import { AuthContext } from "../../context/auth/AuthContext";
 import Post from "../post/Post";
 import Spinner from "../layout/Spinner";
