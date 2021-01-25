@@ -42,8 +42,13 @@ const Post = ({ post, user }) => {
     } else if (sec / (3600 * 24) < 30) {
       timeString = Math.floor(sec / (3600 * 24));
       return timeString.toString() + " days ago";
+    } else if (sec / (3600 * 24 * 30) > 1) {
+      timeString = Math.floor(sec / (3600 * 24 * 30));
+      return timeString.toString() + " months ago";
+    } else if (sec / (3600 * 24 * 30 * 365) > 1) {
+      timeString = Math.floor(sec / (3600 * 24 * 30 * 365));
+      return timeString.toString() + " years ago";
     }
-    return sec.toString();
   };
 
   return (
