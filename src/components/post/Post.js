@@ -9,7 +9,7 @@ import {
 } from "react-icons/bs";
 import { FiShare } from "react-icons/fi";
 import Default from "../../assets/images/default.png";
-import { AuthContext } from "../../context/auth/AuthContext";
+import PostContext from "../../context/post/postContext";
 
 const Post = ({ post, user }) => {
   const [likes, setLikes] = useState(post.likes);
@@ -17,13 +17,12 @@ const Post = ({ post, user }) => {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState(post.comments.slice(0, 3));
 
-  const { likePost, dislikePost, postComment } = useContext(AuthContext);
-
+  const { likePost, dislikePost, postComment } = useContext(PostContext);
   const commentRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment(post.id, comment);
+    postComment(post.id, comment, user);
     setComments([...comments, { username: user.Username, text: comment }]);
     setComment("");
   };
@@ -63,7 +62,7 @@ const Post = ({ post, user }) => {
           className="post-user"
         >
           <img
-            src={post.avatarURL ? post.avatarURL : Default}
+            src={post.AvatarURL ? post.AvatarURL : Default}
             alt=""
             className="avatar"
           />
@@ -83,16 +82,16 @@ const Post = ({ post, user }) => {
             <BsHeartFill
               className="react-icon-liked"
               onClick={() => {
-                dislikePost(post.id);
+                dislikePost(post.id, user);
                 setLiked(!liked);
-                setLikes(likes.filter((email) => email !== user.email));
+                setLikes(likes.filter((email) => email !== user.Email));
               }}
             />
           ) : (
             <BsHeart
               className="react-icons"
               onClick={() => {
-                likePost(post.id);
+                likePost(post.id, user);
                 setLikes([...likes, user.email]);
                 setLiked(!liked);
               }}
@@ -114,7 +113,17 @@ const Post = ({ post, user }) => {
       {post.caption && (
         <div className="caption">
           <div>
-            <h4 className="post-user">{post.username}</h4> {post.caption}
+            <Link
+              to={
+                post.username === user.Username
+                  ? "/dashboard/profile"
+                  : `/dashboard/profile/${post.username}`
+              }
+              className="post-user"
+            >
+              {post.username}
+            </Link>
+            {post.caption}
           </div>
         </div>
       )}
@@ -124,7 +133,17 @@ const Post = ({ post, user }) => {
           {comments.map((comment, i) => (
             <li className="comment" key={i}>
               <div>
-                <h4 className="post-user">{comment.username}</h4> {comment.text}
+                <Link
+                  to={
+                    comment.username === user.Username
+                      ? "/dashboard/profile"
+                      : `/dashboard/profile/${comment.username}`
+                  }
+                  className="post-user"
+                >
+                  {comment.username}
+                </Link>
+                {comment.text}
               </div>
             </li>
           ))}

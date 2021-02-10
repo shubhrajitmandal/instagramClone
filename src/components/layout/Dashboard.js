@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import Appbar from "./Appbar";
-// import AppbarMenu from "./AppbarMenu";
-import { AuthContext } from "../../context/auth/AuthContext";
+import AuthContext from "../../context/auth/authContext2";
+import PostContext from "../../context/post/postContext";
 import Post from "../post/Post";
 import Spinner from "./Spinner";
 
 const Dashboard = () => {
-  const { user, loading, posts } = useContext(AuthContext);
+  const { userProfile, loading } = useContext(AuthContext);
+  const { posts } = useContext(PostContext);
 
   return loading ? (
     <Spinner />
@@ -15,7 +16,7 @@ const Dashboard = () => {
       <Appbar />
       <div className="container">
         {posts.map((post) => (
-          <Post post={post} key={post.id} user={user} />
+          <Post post={post} key={post.id} user={userProfile} />
         ))}
       </div>
       {/* <AppbarMenu /> */}

@@ -4,62 +4,28 @@ import { FaGoogle } from "react-icons/fa";
 import Alert from "../layout/Alert";
 import AppLogo from "../../assets/images/Instagram_logo2.svg";
 import Spinner from "../../assets/images/spinner3.gif";
-import { AuthContext } from "../../context/auth/AuthContext";
-import { Auth, Firestore, GoogleProvider } from "../../firebase/config";
+import AuthContext from "../../context/auth/authContext2";
 
-const Register = (props) => {
+const Register = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { alert, setAlert } = useContext(AuthContext);
+  const { googleAuth, createUserWithEmailAndPassword } = useContext(
+    AuthContext
+  );
 
   const handleRegister = (e) => {
     e.preventDefault();
     setLoading(true);
-
-    Auth.createUserWithEmailAndPassword(email, password)
-      .then((res) => {
-        res.user.updateProfile({
-          displayName: username,
-        });
-        localStorage.setItem("auth-token", res.user.getIdToken());
-        setAlert("");
-
-        Firestore.collection("Users")
-          .doc(res.user.email)
-          .set({
-            AvatarURL: "",
-            Name: name,
-            Username: username,
-            Email: email,
-            Posts: [],
-            Followers: [],
-            Following: [],
-          })
-          .then(setLoading(false), props.history.push("/dashboard"))
-          .catch((err) => console.log(err.message));
-      })
-      .catch((err) => {
-        setAlert(err.message);
-        setLoading(false);
-      });
+    createUserWithEmailAndPassword(email, password, name, username, setLoading);
   };
 
-  const googleAuth = () => {
+  const handleGoogleAuth = () => {
     setLoading(true);
-    Auth.signInWithPopup(GoogleProvider)
-      .then((res) => {
-        localStorage.setItem("auth-token", res.credential.accessToken);
-        setAlert("");
-        props.history.push("/dashboard");
-      })
-      .catch((err) => {
-        setAlert(err.message);
-        setLoading(false);
-      });
+    googleAuth(setLoading);
   };
 
   return (
@@ -68,7 +34,7 @@ const Register = (props) => {
         <img src={AppLogo} alt="Instagram" className="auth-logo" />
         <h3>Sign up to see photos and videos from your friends.</h3>
 
-        <Link to="#" className="google-link" onClick={googleAuth}>
+        <Link to="#" className="google-link" onClick={handleGoogleAuth}>
           <FaGoogle className="google-icon" />
           Log in with Google
         </Link>
@@ -127,7 +93,7 @@ const Register = (props) => {
             )}
           </button>
         </div>
-        {alert && <Alert msg={alert} setAlert={setAlert} />}
+        <Alert />
         <div className="singup-text">
           By signing up, you agree to our Terms , Data Policy and Cookies Policy
           .

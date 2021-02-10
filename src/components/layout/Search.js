@@ -1,18 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { Firestore } from "../../firebase/config";
 import Default from "../../assets/images/default2.png";
-// import Spinner from "../../assets/images/spinner3.gif";
 
 const Search = () => {
   const [query, setQuery] = useState("");
-  // const [loading, setLoading] = useState(false);
   const [queryRes, setQueryRes] = useState(null);
+
+  useEffect(() => {
+    if (query) {
+      Firestore.collection("Users")
+        .get()
+        .then((snap) => {
+          const Users = [];
+          snap.forEach((doc) => {
+            const user = doc.data();
+            if (user.Username.includes(query)) Users.push(user);
+          });
+          setQueryRes(Users);
+        });
+    } else {
+      setQueryRes(null);
+    }
+  }, [query]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setLoading(true);
     Firestore.collection("Users")
       .get()
       .then((snap) => {
@@ -21,9 +35,7 @@ const Search = () => {
           const user = doc.data();
           if (user.Username.includes(query)) Users.push(user);
         });
-        console.log(Users);
         setQueryRes(Users);
-        // setLoading(false);
       });
   };
 
@@ -34,7 +46,9 @@ const Search = () => {
           type="text"
           placeholder="Search"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            setQuery(e.target.value);
+          }}
         />
         {query && (
           <IoMdCloseCircle

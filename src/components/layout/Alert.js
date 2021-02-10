@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
+import AlertContext from "../../context/alert/alertContext";
 
-const Alert = ({ msg, setAlert }) => {
-  useEffect(() => {
-    // setTimeout(() => {
-    //   setAlert("");
-    // }, 5000);
-  }, [setAlert]);
-  return <div className="alert">{msg}</div>;
+const Alert = () => {
+  const { alertMsg } = useContext(AlertContext);
+
+  return <div className="alert">{alertMsg}</div>;
 };
 
 export default Alert;

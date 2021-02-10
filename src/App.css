@@ -382,18 +382,13 @@
   padding: 1rem 0 1rem 1rem;
 }
 
-.post-header a {
+.post-header .post-user {
+  font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
+  font-weight: 700;
   text-decoration: none;
-}
-
-.post-user {
-  font-size: 16px;
-  display: inline;
-  font-weight: 600;
 }
 
 .avatar {
@@ -428,7 +423,7 @@
 }
 
 .post-react {
-  padding: 1rem 0 1rem 1rem;
+  padding: 1rem 0 0.5rem 1rem;
   display: flex;
   align-items: center;
 }
@@ -458,23 +453,20 @@
 
 .likes {
   margin-left: 1rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   font-size: 1rem;
 }
 
 .caption {
   padding: 0 1rem;
+  font-size: 15px;
   line-height: 1rem;
   width: 90%;
 }
 
 .caption {
   line-height: 1rem;
-}
-
-.post-comment {
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .comment-area {
@@ -482,8 +474,18 @@
   list-style: none;
 }
 
+.post-user {
+  margin-right: 0.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 14px;
+  display: inline;
+  font-weight: 700;
+}
+
 .comment {
   margin-bottom: 0.5rem;
+  font-size: 14px;
 }
 
 .comment div {
@@ -497,7 +499,6 @@
 }
 
 .comment-input {
-  margin-bottom: 0.5rem;
   width: 100%;
   padding: 0.75rem 1rem;
   outline: none;
@@ -529,8 +530,8 @@
 }
 
 .timestamp {
-  margin-left: 1rem;
-  margin-bottom: 1rem;
+  margin: 10px 0 10px 1rem;
+  display: flex;
   font-size: 13px;
   color: #999;
 }
@@ -758,7 +759,7 @@
 .gallery-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill;
 }
 
 .gallery-item {
@@ -950,6 +951,10 @@
 }
 
 @media screen and (max-width: 600px) {
+  .appbar {
+    height: 3.5rem;
+  }
+
   .search {
     display: none;
   }
@@ -958,6 +963,21 @@
     margin-top: 0;
     padding: 0;
     width: 100%;
+  }
+
+  .post {
+    width: 100%;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .post-header {
+    padding: 10px 0 12px 16px;
   }
 
   .post-imageInput,
@@ -981,20 +1001,30 @@
     width: 200px;
   }
 
+  .likes {
+    font-size: 15px;
+    margin-bottom: 0.25rem;
+  }
+
+  .timestamp {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
   .comment-input {
     margin-bottom: 0.5rem;
     width: 100%;
     padding: 0.75rem;
     outline: none;
     border: 1px solid #ccc;
-    border-radius: 2rem;
+    border-radius: 1.5rem;
     font-size: 14px;
   }
 
   .profile-avatar img,
   .profile-avatar input[type="file"] {
-    height: 80px;
-    width: 80px;
+    height: 100px;
+    width: 100px;
   }
 
   .profile-desc {
@@ -1157,19 +1187,29 @@
   }
 
   .react-icons {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 
   .react-icon-liked {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 
   .likes {
+    font-size: 15px;
+  }
+
+  .post-header .post-user {
     font-size: 14px;
+    font-weight: 700;
   }
 
   .post-user {
     font-size: 14px;
+    font-weight: 700;
+  }
+
+  .comment {
+    font-size: 13px;
   }
 
   .auth {
@@ -1185,5 +1225,24 @@
     border: none;
     margin: 0;
     padding: 0;
+  }
+
+  .profile-name {
+    font-size: 20px;
+  }
+
+  .profile-info {
+    padding-right: 0;
+  }
+
+  .profile-edit,
+  .profile-follow {
+    font-size: 11px;
+  }
+
+  .profile-avatar img,
+  .profile-avatar input[type="file"] {
+    height: 80px;
+    width: 80px;
   }
 }

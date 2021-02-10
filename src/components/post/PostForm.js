@@ -1,28 +1,26 @@
 import React, { useContext, useState, Fragment } from "react";
 import ImagePlaceholder from "../../assets/images/placeholder2.png";
 import Appbar from "../layout/Appbar";
-// import AppbarMenu from "../layout/AppbarMenu";
-import { AuthContext } from "../../context/auth/AuthContext";
-import Loader from "../layout/Loader";
-import Spinner from "../layout/Spinner";
+import PostContext from "../../context/post/postContext";
+import ProgressBar from "../layout/ProgressBar";
+// import Spinner from "../layout/Spinner";
 
 const PostForm = (props) => {
-  const { loading, uploadPost } = useContext(AuthContext);
+  const { uploadPost } = useContext(PostContext);
+  const [percentage, setPercentage] = useState(0);
   const [file, setFile] = useState(null);
   const [fileSrc, setFileSrc] = useState(null);
   const [caption, setCaption] = useState("");
 
   const handlePost = (e) => {
     e.preventDefault();
-    uploadPost(file, caption, props.history);
+    uploadPost(file, caption, setPercentage);
   };
 
-  return loading ? (
-    <Spinner />
-  ) : (
+  return (
     <div className="dashboard">
       <Appbar />
-      <Loader />
+      <ProgressBar percentage={percentage} />
       <div className="container">
         <form className="post-form" onSubmit={(e) => handlePost(e)}>
           {!file && (

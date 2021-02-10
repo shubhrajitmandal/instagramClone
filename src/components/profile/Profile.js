@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Default from "../../assets/images/default.png";
-import { AuthContext } from "../../context/auth/AuthContext";
 import Appbar from "../layout/Appbar";
-// import AppbarMenu from "../layout/AppbarMenu";
 import Spinner from "../layout/Spinner";
 import { BsHeartFill, BsChatFill } from "react-icons/bs";
 import { firebase, Firestore } from "../../firebase/config";
+import AuthContext from "../../context/auth/authContext2";
 
 const Profile = (props) => {
   const [profile, setProfile] = useState(null);
@@ -16,7 +15,7 @@ const Profile = (props) => {
 
   let { username } = useParams();
 
-  const { user } = useContext(AuthContext);
+  const { userProfile } = useContext(AuthContext);
 
   useEffect(() => {
     Firestore.collection("Users")
@@ -26,8 +25,7 @@ const Profile = (props) => {
           const profile = doc.data();
           if (profile.Username === username) {
             setProfile(profile);
-            const user = localStorage.getItem("current-user");
-            setIsFollowing(profile.Followers.includes(user));
+            setIsFollowing(profile.Followers.includes(userProfile.Email));
             Firestore.collection("Posts")
               .get()
               .then((snap) => {
@@ -53,11 +51,11 @@ const Profile = (props) => {
     Firestore.collection("Users")
       .doc(profile.Email)
       .update({
-        Followers: firebase.firestore.FieldValue.arrayUnion(user.Email),
+        Followers: firebase.firestore.FieldValue.arrayUnion(userProfile.Email),
       })
       .then(setIsFollowing(!isFollowing));
     Firestore.collection("Users")
-      .doc(user.Email)
+      .doc(userProfile.Email)
       .update({
         Following: firebase.firestore.FieldValue.arrayUnion(profile.Email),
       });
@@ -67,11 +65,11 @@ const Profile = (props) => {
     Firestore.collection("Users")
       .doc(profile.Email)
       .update({
-        Followers: firebase.firestore.FieldValue.arrayRemove(user.Email),
+        Followers: firebase.firestore.FieldValue.arrayRemove(userProfile.Email),
       })
       .then(setIsFollowing(!isFollowing));
     Firestore.collection("Users")
-      .doc(user.Email)
+      .doc(userProfile.Email)
       .update({
         Following: firebase.firestore.FieldValue.arrayRemove(profile.Email),
       });

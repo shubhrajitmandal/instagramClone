@@ -4,44 +4,24 @@ import AppLogo from "../../assets/images/Instagram_logo2.svg";
 import GoogleLogo from "../../assets/images/google.png";
 import Alert from "../layout/Alert";
 import Spinner from "../../assets/images/spinner3.gif";
-import { AuthContext } from "../../context/auth/AuthContext";
-import { Auth, GoogleProvider } from "../../firebase/config";
+import AuthContext from "../../context/auth/authContext2";
 
-const Login = (props) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { alert, setAlert } = useContext(AuthContext);
+  const { loginWithEmail, googleAuth } = useContext(AuthContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading(true);
-
-    Auth.signInWithEmailAndPassword(email, password)
-      .then((res) => {
-        localStorage.setItem("auth-token", res.user.getIdToken());
-        setAlert("");
-        props.history.push("/dashboard");
-      })
-      .catch((err) => {
-        setAlert(err.message);
-        setLoading(false);
-      });
+    loginWithEmail(email, password, setLoading);
   };
 
-  const googleAuth = () => {
+  const handleGoogleAuth = () => {
     setLoading(true);
-    Auth.signInWithPopup(GoogleProvider)
-      .then((res) => {
-        localStorage.setItem("auth-token", res.credential.accessToken);
-        setAlert("");
-        props.history.push("/dashboard");
-      })
-      .catch((err) => {
-        setAlert(err.message);
-        setLoading(false);
-      });
+    googleAuth(setLoading);
   };
 
   return (
@@ -78,16 +58,14 @@ const Login = (props) => {
             )}
           </button>
         </div>
-
-        {alert && <Alert msg={alert} setAlert={setAlert} />}
-
+        <Alert />
         <div className="google-auth">
           <div>
             <div className="bar"></div>
             OR
             <div className="bar"></div>
           </div>
-          <Link to="#" className="google-link" onClick={googleAuth}>
+          <Link to="#" className="google-link" onClick={handleGoogleAuth}>
             <img src={GoogleLogo} alt="Google" height="24" width="24" /> Log in
             with Google
           </Link>

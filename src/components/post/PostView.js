@@ -1,29 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Appbar from "../layout/Appbar";
-// import AppbarMenu from "../layout/AppbarMenu";
-import { AuthContext } from "../../context/auth/AuthContext";
+import AuthContext from "../../context/auth/authContext2";
+import PostContext from "../../context/post/postContext";
 import Post from "../post/Post";
 import Spinner from "../layout/Spinner";
-import { Firestore } from "../../firebase/config";
 
 const PostView = () => {
   const [post, setPost] = useState({});
   const [loading2, setLoading2] = useState(true);
-  const { user, loading } = useContext(AuthContext);
+  const { userProfile, loading } = useContext(AuthContext);
+  const { getPostByID } = useContext(PostContext);
   let { postId } = useParams();
 
   useEffect(() => {
-    Firestore.collection("Posts")
-      .get()
-      .then((snap) => {
-        snap.forEach((doc) => {
-          if (doc.id === postId) {
-            setPost({ id: doc.id, ...doc.data() });
-            setLoading2(false);
-          }
-        });
-      });
+    getPostByID(postId, setPost, setLoading2);
+    //eslint-disable-next-line
   }, [loading, postId]);
 
   return loading || loading2 ? (
@@ -32,7 +24,7 @@ const PostView = () => {
     <div className="dashboard">
       <Appbar />
       <div className="container">
-        <Post post={post} user={user} />
+        <Post post={post} user={userProfile} />
       </div>
       {/* <AppbarMenu /> */}
     </div>

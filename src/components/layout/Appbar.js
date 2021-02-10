@@ -6,14 +6,17 @@ import { AiFillHome } from "react-icons/ai";
 import Search from "./Search";
 import AppLogo from "../../assets/images/Instagram_logo2.svg";
 import DefaultProfile from "../../assets/images/default.png";
-import { AuthContext } from "../../context/auth/AuthContext";
+import AuthContext from "../../context/auth/authContext2";
+import PostContext from "../../context/post/postContext";
 
 const Appbar = () => {
-  const { logout, user } = useContext(AuthContext);
+  const { logout, userProfile } = useContext(AuthContext);
+  const { clearPosts } = useContext(PostContext);
   const history = useHistory();
 
   const handleLogout = () => {
     logout();
+    clearPosts();
     history.push("/dashboard");
   };
 
@@ -31,7 +34,9 @@ const Appbar = () => {
           </Link>
           <Link to="/dashboard/profile">
             <img
-              src={user.AvatarURL ? user.AvatarURL : DefaultProfile}
+              src={
+                userProfile.AvatarURL ? userProfile.AvatarURL : DefaultProfile
+              }
               // src={DefaultProfile}
               alt=""
               className="user-avatar"

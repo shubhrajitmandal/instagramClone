@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import DefaultProfile from "../../assets/images/default.png";
-import { AuthContext } from "../../context/auth/AuthContext";
+import AuthContext from "../../context/auth/authContext2";
 import Appbar from "../layout/Appbar";
 import Spinner from "../layout/Spinner";
 
-const EditProfileForm = (props) => {
-  const { loading, user, editProfile } = useContext(AuthContext);
+const EditProfileForm = () => {
+  const { loading, userProfile, editProfile } = useContext(AuthContext);
 
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -15,22 +15,20 @@ const EditProfileForm = (props) => {
   const [phone, setPhone] = useState("");
 
   useEffect(() => {
-    if (user) {
-      setName(user.Name);
-      setUsername(user.Username);
-      setEmail(user.Email);
-      if (user.Bio) setBio(user.Bio);
-      if (user.Gender) setGender(user.Gender);
-      if (user.Phone) setPhone(user.Phone);
+    if (userProfile) {
+      setName(userProfile.Name);
+      setUsername(userProfile.Username);
+      setEmail(userProfile.Email);
+      if (userProfile.Bio) setBio(userProfile.Bio);
+      if (userProfile.Gender) setGender(userProfile.Gender);
+      if (userProfile.Phone) setPhone(userProfile.Phone);
     }
-  }, [loading, user]);
+  }, [loading, userProfile]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     editProfile(name, username, email, bio, gender, phone);
-
-    props.history.push("/dashboard/profile");
   };
 
   return loading ? (
@@ -42,22 +40,20 @@ const EditProfileForm = (props) => {
       <div className="edit-container">
         <ul className="edit-sidebar">
           <li className="active">Edit Profile</li>
-          <li>Change Password</li>
-          <li>Privacy & Security</li>
+          {/* <li>Change Password</li>
+          <li>Privacy & Security</li> */}
         </ul>
 
         <div className="edit-form">
           <div className="form-group">
             <img
-              src={user.AvatarURL ? user.AvatarURL : DefaultProfile}
+              src={
+                userProfile.AvatarURL ? userProfile.AvatarURL : DefaultProfile
+              }
               alt=""
               className="edit-avatar"
             />
-            <div className="edit-header">
-              {user.Username}
-              {/* <label>Change Profile Photo</label>
-              <input type="file" accept="image/*" /> */}
-            </div>
+            <div className="edit-header">{userProfile.Username}</div>
           </div>
 
           <div className="form-group">

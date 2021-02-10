@@ -1,18 +1,21 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Default from "../../assets/images/default.png";
-import { AuthContext } from "../../context/auth/AuthContext";
+import AuthContext from "../../context/auth/authContext2";
 import Appbar from "../layout/Appbar";
-// import AppbarMenu from "../layout/AppbarMenu";
-import Loader from "../layout/Loader";
+import ProgressBar from "../layout/ProgressBar";
 import Spinner from "../layout/Spinner";
 import { BsHeartFill, BsChatFill } from "react-icons/bs";
 
 const UserProfile = () => {
-  const { loading, user, updatePhoto, userPosts } = useContext(AuthContext);
+  const { loading, userProfile, updateProfilePicture, userPosts } = useContext(
+    AuthContext
+  );
+
+  const [percentage, setPercentage] = useState(0);
 
   const changeAvatar = (file) => {
-    updatePhoto(file);
+    updateProfilePicture(file, setPercentage);
   };
 
   return loading ? (
@@ -20,11 +23,14 @@ const UserProfile = () => {
   ) : (
     <div className="dashboard">
       <Appbar />
-      <Loader />
+      <ProgressBar percentage={percentage} />
       <div className="profile-container">
         <div className="profile-desc">
           <div className="profile-avatar">
-            <img src={user.AvatarURL ? user.AvatarURL : Default} alt="" />
+            <img
+              src={userProfile.AvatarURL ? userProfile.AvatarURL : Default}
+              alt=""
+            />
             <input
               type="file"
               accept="image/*"
@@ -34,7 +40,7 @@ const UserProfile = () => {
 
           <div className="profile-info">
             <div className="profile-header">
-              <h3 className="profile-name">{user.Username}</h3>
+              <h3 className="profile-name">{userProfile.Username}</h3>
               <Link to="/dashboard/profile/edit" className="profile-edit">
                 Edit Profile
               </Link>
@@ -42,19 +48,19 @@ const UserProfile = () => {
 
             <ul className="profile-stats">
               <li>
-                <strong>{user.Posts.length}</strong> posts
+                <strong>{userPosts.length}</strong> posts
               </li>
               <li>
-                <strong>{user.Followers.length}</strong> followers
+                <strong>{userProfile.Followers.length}</strong> followers
               </li>
               <li>
-                <strong>{user.Following.length}</strong> following
+                <strong>{userProfile.Following.length}</strong> following
               </li>
             </ul>
 
             <div className="profile-bio">
-              <h3>{user.Name}</h3>
-              {user.Bio && <p>{user.Bio}</p>}
+              <h3>{userProfile.Name}</h3>
+              {userProfile.Bio && <p>{userProfile.Bio}</p>}
             </div>
           </div>
         </div>
