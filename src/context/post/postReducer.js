@@ -1,4 +1,4 @@
-import { GET_POSTS, CLEAR_POSTS } from "./types";
+import { GET_POSTS, CLEAR_POSTS, ADD_POST } from "./types";
 
 const PostReducer = (state, action) => {
   switch (action.type) {
@@ -6,6 +6,11 @@ const PostReducer = (state, action) => {
       return {
         ...state,
         posts: action.payload,
+      };
+
+    case ADD_POST:
+      return {
+        posts: [action.payload, ...state.posts],
       };
 
     case CLEAR_POSTS:

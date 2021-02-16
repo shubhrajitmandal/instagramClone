@@ -107,7 +107,9 @@ const Post = ({ post, user }) => {
           <span className="spacer"></span>
           <BsBookmark className="react-icons" />
         </div>
-        <h3 className="likes">{likes.length}likes</h3>
+        <h3 className="likes">
+          {likes.length <= 1 ? `${likes.length} like` : `${likes.length} likes`}
+        </h3>
       </div>
 
       {post.caption && (

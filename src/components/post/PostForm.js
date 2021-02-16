@@ -8,12 +8,14 @@ import ProgressBar from "../layout/ProgressBar";
 const PostForm = (props) => {
   const { uploadPost } = useContext(PostContext);
   const [percentage, setPercentage] = useState(0);
+  const [uploading, setUploading] = useState(false);
   const [file, setFile] = useState(null);
   const [fileSrc, setFileSrc] = useState(null);
   const [caption, setCaption] = useState("");
 
   const handlePost = (e) => {
     e.preventDefault();
+    setUploading(true);
     uploadPost(file, caption, setPercentage);
   };
 
@@ -49,8 +51,10 @@ const PostForm = (props) => {
             <div
               className="preview-container"
               onClick={() => {
-                setFile(null);
-                setFileSrc(null);
+                if (!uploading) {
+                  setFile(null);
+                  setFileSrc(null);
+                }
               }}
             >
               <img src={fileSrc} alt="" className="post-preview" />

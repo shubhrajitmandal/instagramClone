@@ -6,7 +6,7 @@ import PostReducer from "./postReducer";
 
 import AuthContext from "../auth/authContext2";
 
-import { GET_POSTS, CLEAR_POSTS } from "./types";
+import { GET_POSTS, CLEAR_POSTS, ADD_POST } from "./types";
 
 const PostState = (props) => {
   const initialState = {
@@ -17,6 +17,12 @@ const PostState = (props) => {
   const { user, userProfile } = useContext(AuthContext);
 
   useEffect(() => {
+    getPosts();
+  }, []);
+
+  const [state, dispatch] = useReducer(PostReducer, initialState);
+
+  const getPosts = () => {
     Firestore.collection("Posts")
       .orderBy("date", "desc")
       .limit(30)
@@ -40,9 +46,7 @@ const PostState = (props) => {
           payload: posts,
         });
       });
-  }, []);
-
-  const [state, dispatch] = useReducer(PostReducer, initialState);
+  };
 
   const getPostByID = (postId, setPost, setLoading2) => {
     Firestore.collection("Posts")
@@ -87,7 +91,12 @@ const PostState = (props) => {
           comments: [],
           date: Date.now(),
         };
+        const AvatarURL = userProfile.AvatarURL;
         const res = await Firestore.collection("Posts").add(post);
+        dispatch({
+          type: ADD_POST,
+          payload: { ...post, AvatarURL },
+        });
         await Firestore.collection("Users")
           .doc(user.email)
           .set(
@@ -97,6 +106,7 @@ const PostState = (props) => {
             { merge: true }
           );
         setPercentage(0);
+
         history.push("/dashboard");
       }
     );
