@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { Firestore } from "../../firebase/config";
 import Default from "../../assets/images/default2.png";
+import AuthContext from "../../context/auth/authContext2";
 
 const Search = () => {
   const [query, setQuery] = useState("");
   const [queryRes, setQueryRes] = useState(null);
+
+  const { userProfile } = useContext(AuthContext);
 
   useEffect(() => {
     if (query) {
@@ -65,12 +68,16 @@ const Search = () => {
           {queryRes.map((user) => (
             <Link
               to={
-                localStorage.getItem("current-user") === user.Email
+                userProfile.Email === user.Email
                   ? "/dashboard/profile"
                   : `/dashboard/profile/${user.Username}`
               }
               key={user.Email}
               className="search-result-items"
+              onClick={() => {
+                setQuery("");
+                setQueryRes(null);
+              }}
             >
               <div>
                 <img

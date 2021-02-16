@@ -92,7 +92,7 @@ const Post = ({ post, user }) => {
               className="react-icons"
               onClick={() => {
                 likePost(post.id, user);
-                setLikes([...likes, user.email]);
+                setLikes([...likes, user.Email]);
                 setLiked(!liked);
               }}
             />
@@ -107,7 +107,7 @@ const Post = ({ post, user }) => {
           <span className="spacer"></span>
           <BsBookmark className="react-icons" />
         </div>
-        <h3 className="likes">{likes.length} likes</h3>
+        <h3 className="likes">{likes.length}likes</h3>
       </div>
 
       {post.caption && (

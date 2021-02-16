@@ -50,8 +50,18 @@ const PostState = (props) => {
       .then((snap) => {
         snap.forEach((doc) => {
           if (doc.id === postId) {
-            setPost({ id: doc.id, ...doc.data() });
-            setLoading2(false);
+            const post = doc.data();
+            post.id = doc.id;
+            Firestore.collection("Users")
+              .doc(post.email)
+              .get()
+              .then((doc) => {
+                const user = doc.data();
+                post.AvatarURL = user.AvatarURL;
+                setPost(post);
+                setLoading2(false);
+              })
+              .catch((err) => console.log(err.message));
           }
         });
       });
